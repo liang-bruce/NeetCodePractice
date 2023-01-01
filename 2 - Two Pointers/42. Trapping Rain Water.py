@@ -34,7 +34,7 @@ class Solution:
         # res = 0
 
         # while l < r:
-        #     if leftMax < rightMax:
+        #     if leftMax <= rightMax:
         #         l += 1
         #         leftMax = max(leftMax, height[l])
         #         res += leftMax - height[l]
