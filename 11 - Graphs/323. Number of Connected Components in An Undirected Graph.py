@@ -26,7 +26,7 @@ class Solution:
 		else:
 			par[p2] = p1
 			rank[p1] += rank[p2]
-		return p
+		return 1
 
 	res = n
 	for node1, node2 in edges:
