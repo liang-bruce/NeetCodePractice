@@ -43,3 +43,52 @@ class LRUCache:
             lru = self.left.next
             self.remove(lru)
             del self.cache[lru.key]
+
+# 2X
+class DLLNode:
+    def __init__(self, key=0, val=0):
+        self.prev, self.next = None, None
+        self.key = key
+        self.val = val
+
+class LRUCache:
+
+    def __init__(self, capacity: int):
+        self.cache = {}
+        self.cap = capacity
+        self.left, self.right = DLLNode(), DLLNode() 
+        self.left.next = self.right
+        self.right.prev = self.left
+    
+    def add(self, node):
+        prev, nxt = self.right.prev, self.right
+        node.prev = prev
+        node.next = nxt
+        nxt.prev = node
+        prev.next = node
+
+    def remove(self, node):
+        prev, nxt = node.prev, node.next
+        prev.next, nxt.prev = nxt, prev
+
+
+    def get(self, key: int) -> int:
+        if key in self.cache:
+            #reorder
+            self.remove(self.cache[key])
+            self.add(self.cache[key])
+            return self.cache[key].val
+        
+        return -1
+
+    def put(self, key: int, value: int) -> None:
+        if key in self.cache:
+            self.remove(self.cache[key])
+        newNode = DLLNode(key, value)
+        self.add(newNode)
+        self.cache[key] = newNode
+
+        if len(self.cache) > self.cap:
+            lru = self.left.next
+            self.remove(lru)
+            del self.cache[lru.key]
