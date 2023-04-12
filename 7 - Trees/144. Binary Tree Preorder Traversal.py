@@ -12,3 +12,16 @@ class Solution:
         res = []
         dfs(root, res)
         return res
+
+        # iterative DFS
+        # cur = root
+        # stack, res = [], []
+
+        # while cur or stack:
+        #     if cur:
+        #         res.append(cur.val)
+        #         stack.append(cur.right)
+        #         cur = cur.left
+        #     else:
+        #         cur = stack.pop()
+        # return res
