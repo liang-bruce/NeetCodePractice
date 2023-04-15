@@ -44,3 +44,22 @@ class Solution:
                 stack.append([node.right, depth + 1])
 
         return res
+
+
+class Solution:
+    def maxDepth(self, root: Optional[TreeNode]) -> int:
+        # DFS
+        depth, counter = 0, 0
+
+        def dfs(node, counter):
+            nonlocal depth
+            if not node:
+                depth = max(depth, counter)
+                return
+
+            counter += 1
+            dfs(node.left, counter)
+            dfs(node.right, counter)
+        
+        dfs(root, counter)
+        return depth
